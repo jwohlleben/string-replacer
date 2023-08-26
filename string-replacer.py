@@ -15,6 +15,7 @@ import modules.mylog as log
 from modules.myargparser import parser
 
 def replace_normal(content, args):
+    '''Replace search_for with replace_with in content using normal replacement'''
     if args.number_of_replacements == 0:
         return content.replace(args.search_for, args.replace_with)
     elif args.number_of_replacements > 0:
@@ -23,6 +24,7 @@ def replace_normal(content, args):
         return args.replace_with.join(content.rsplit(args.search_for, abs(args.number_of_replacements)))
 
 def in_filter_normal(element, filter):
+    '''Return True, if element matches filter'''
     for f in filter:
         if f in element:
             return True
@@ -30,6 +32,7 @@ def in_filter_normal(element, filter):
     return False
 
 def run(start_directory, args, replace, in_filter):
+    '''Run the replacement and return the number of modified files'''
     modified_count = 0
     for file in os.listdir(start_directory):
         filepath = os.path.join(start_directory, file)
